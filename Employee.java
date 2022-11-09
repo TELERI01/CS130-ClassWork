@@ -1,90 +1,49 @@
-package Classwork;
+package PracticeConstructor;
 
 public class Employee {
 
-	private String firstName;
-	private String lastName;
-	private String position;
-	private double salary;
-	private double hourWorked;
+	private String name;
+	private double payRate;
+	private final int EMPLOYEE_ID;
+	private static int nextID=1000;
 	
-	public Employee(){
-		this.firstName="";
-		this.lastName="";
-		this.position="";
-		this.salary=12.50;
-		this.hourWorked=0.0;
-	}
+	public static final double STARTING_PAY_RATE = 12.50;
 	
-	public Employee(String firstName, String lastName, String position, double salary, double hourWorked) {
-		this.firstName=firstName;
-		this.lastName=lastName;
-		this.position=position;
-		this.salary=salary;
-		this.hourWorked=hourWorked;
+	//First  Constructor
+	public Employee(String name) {
+		this.name= name;
+		EMPLOYEE_ID = getNextID();
 	}
 	
-	public String getFirstName() {
-		return firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public String getPos() {
-		return position;
-	}
-	public double  getSalary() {
-		return salary;
-	}
-	public double getHours() {
-		return hourWorked;
+	public Employee(String name, double payRate) {
+		this.name=name;
+		this.payRate=payRate;
+		EMPLOYEE_ID = getNextID();
 	}
 	
-	public void setFirstname() {
-		this.firstName=firstName;
+	public String getName() {
+		return name;
 	}
-	public void setLastname() {
-		this.lastName=lastName;
+	public int getEmployeeID() {
+		return EMPLOYEE_ID;
 	}
-	public void setPos() {
-		this.position=position;
-	}
-	public void setSal() {
-		this.salary=salary;
-	}
-	public void setHours() {
-		this.hourWorked=hourWorked;
+	public double getPayRate() {
+		return payRate;
 	}
 	
-	public double showCurrentPay() {
-		double pay=0.0;
-		if(hourWorked<=40) {
-			pay=hourWorked*salary;
-		}
-		else {
-			double overtime = hourWorked-40.0;
-			pay=(40*salary)+(overtime*salary*1.5);
-		}
-		return pay;
+	public void changeName(String newName) {
+		name=newName;
 	}
-	public String displayPayCheck() {
-		StringBuilder sb= new StringBuilder();
-		sb.append("=====" +firstName.toUpperCase()+" " +lastName.toUpperCase()+"=====\n");
-		sb.append("Hours Worked : " + hourWorked +"\n");
-		sb.append("Position :" + position + "\n");
-		sb.append("Salary :" + salary +"\n");
-		sb.append("Total Pay: " +this.showCurrentPay()+"\n");
-		
-		return sb.toString();
+	public void changePayRate(double newPayRate) {
+		payRate = newPayRate;
 	}
 	
-	public static void main(String[] args) {
-		Employee firstemp = new Employee("Tyler", "Lericos", "Teammember", 12.50, 23);
-		System.out.println(firstemp.displayPayCheck());
-		
-		Employee secemp = new Employee("Gary", "theSnail", "Manager", 7.98, 12);
-		System.out.println(secemp.displayPayCheck());
+	public static int getNextID() {
+		int id = nextID;
+		nextID++;
+		return id;
+	}
+	
 
-	}
 
 }
